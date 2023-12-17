@@ -96,8 +96,11 @@ public class MainClass {
         driver.findElement(By.xpath("//*[contains(@class, 'ph-auth')]")).click();
         Assert.assertEquals("Тестовый Тестич", driver.findElement(By.xpath("//*[contains(@class, 'ph-name')]")).getText());
 
+        // Выйдем из профиля
         driver.findElement(By.xpath("//*[contains(text(), 'Выйти')]")).click();
-        Assert.assertTrue(driver.findElement(By.xpath("//button[contains(@class, 'resplash-btn resplash-btn_primary resplash-btn_mailbox-big')]")).isDisplayed());
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        Assert.assertTrue(driver.findElement(By.xpath("//*[contains(@class, 'footer_logged-out')]")).isDisplayed());
 
         driver.quit();
     }
